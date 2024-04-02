@@ -1,0 +1,67 @@
+/* #puzzleBoard {
+    width: 800px;
+    height: 600px;
+    border: 1px solid black;
+    background-color: white;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+} */
+.puzzleBoardContainer {
+    width: 800px;
+    height: 600px;
+    border: 1px solid black;
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+.puzzleBoardContainer img {
+    margin: -150px;
+}
+
+.puzzleOptions {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+
+    /* justify-content: center;
+    align-items: center; */
+
+}
+
+.imageOption {
+    width: 100px;
+    margin: 10px;
+}
+
+.imageBtnContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    margin: 0px auto;
+    width: 600px;
+}
+
+.puzzleButton {
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 700;
+    background-color: rgb(236, 73, 55);
+    height: 30px;
+    cursor: pointer;
+}
+
+.puzzleButton:hover {
+    background-color: rgb(210, 40, 21);
+}
+
+/* #puzzleBoard img {
+    width: 160px;
+    height: 120px;
+    border: 1px lightblue solid;
+} */
