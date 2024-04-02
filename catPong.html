@@ -1,0 +1,90 @@
+<!--  In your HTML, add comments that indicate who the audience is (who the interface is designed for), what design layout you selected and what color scheme you selected.
+    
+    1. drag and drop picture or puzzle with theme options
+    2. cat racing game
+    3. pong but with cats batting yarn OR a text-based game for cat wrangling -->
+
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Term Project</title>
+    <link href="css/finalProject.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:wght@800&family=Madimi+One&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap"
+        rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <style>
+        canvas {
+            background-color: rgb(177, 238, 242);
+            border: black 1px solid;
+        }
+
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            font-size: 1em;
+            ;
+        }
+
+        section {
+            width: auto;
+            background-color: blueviolet;
+            padding: 10px;
+            margin: auto;
+            /* color: white; */
+
+        }
+
+        #instructions {
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 10px;
+        }
+    </style>
+
+</head>
+
+<body onload="startGame()">
+    <header>
+        <h1>CIT 190: Racing Cats <img src="media/cat1.png" style="width:100px; float: right;" /></h1>
+    </header>
+    <main>
+        <nav id="nav-main">
+            <ul>
+                <li><a href="finalProject.html">Home</a></li>
+                <li><a href="puzzles.html">Puzzles</a></li>
+                <li><a href="catPong.html" class="active-page">Pong with Cats</a></li>
+                <li><a href="game3.html">Game 3</a></li>
+                <li><a href="readme.txt" target="_blank">READ ME</a></li>
+                <!-- <li><a href="#">About</a></li> -->
+            </ul>
+        </nav>
+        <section>
+            <div id="instructions">
+                <button class="accordion">How to Play Cat Pong</button>
+                <div class="panel">
+                    <p>This is pong reimagined - with cats! Play against the computer or with a friend. Use keyboard or
+                        mouse
+                        controls to play.</p>
+                </div>
+            </div>
+            <!-- <div>
+                <canvas id="catPongCanvas">Racing Cats Goes Here</canvas>
+            </div> -->
+
+        </section>
+    </main>
+    <footer>
+
+    </footer>
+    <script src="js/catPong.js"></script>
+    <script src="js/finalProject.js"></script>
+</body>
+
+</html>

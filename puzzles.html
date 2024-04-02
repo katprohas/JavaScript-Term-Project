@@ -1,0 +1,77 @@
+<!--  In your HTML, add comments that indicate who the audience is (who the interface is designed for), what design layout you selected and what color scheme you selected.
+    
+    1. drag and drop picture or puzzle with theme options
+    2. cat racing game
+    3. pong but with cats batting yarn OR a text-based game for cat wrangling -->
+
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Term Project</title>
+    <link href="css/finalProject.css" rel="stylesheet">
+    <link href="css/puzzles.css" rel="stylesheet">
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:wght@800&family=Madimi+One&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>CIT 190: Puzzles <img src="media/cat1.png" style="width:100px; float: right;" /></h1>
+    </header>
+    <main>
+        <nav id="nav-main">
+            <ul>
+                <li><a href="finalProject.html">Home</a></li>
+                <li><a href="puzzles.html" class="active-page">Puzzles</a></li>
+                <li><a href="catPong.html">Pong with Cats</a></li>
+                <li><a href="game3.html">Game 3</a></li>
+                <li><a href="readme.txt" target="_blank">READ ME</a></li>
+                <!-- <li><a href="#">About</a></li> -->
+            </ul>
+        </nav>
+        <section>
+            <button class="accordion">How to Play</button>
+            <div class="panel">
+                <p>These are your classic drag-and-drop puzzles and pictures. You can select the puzzle image of your
+                    choice to
+                    load
+                    it, and then drag and drop the pieces on the board to complete the image.
+                </p>
+            </div>
+        </section>
+        <div class="imageBtnContainer">
+            <div class="puzzleOptions">
+                <img src="media/puzzles/northernLights.jpg" alt="northern lights" class="imageOption"
+                    id="northernLights" />
+                <button id="northernLightsBtn" class="puzzleButton">Northern Lights</button>
+            </div>
+
+            <div class="puzzleOptions">
+                <img src="media/puzzles/sunrise.jpg" alt="sunrise" class="imageOption">
+                <button id="sunriseBtn" class="puzzleButton">Sunrise</button>
+            </div>
+            <div class="puzzleOptions">
+                <img src="media/puzzles/fallLeaves.jpg" alt="fall leaves" class="imageOption">
+                <button id="leavesBtn" class="puzzleButton">Fall Leaves</button>
+            </div>
+        </div>
+        <!-- <div id="puzzleBoard"> -->
+        <div id="puzzleDisplay"></div>
+
+        <!-- <div id="pieces"></div> -->
+    </main>
+    <footer>
+
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="js/finalProject.js"></script>
+    <script src="js/puzzles.js"></script>
+</body>
+
+</html>
