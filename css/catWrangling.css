@@ -1,0 +1,76 @@
+#game-container {
+    background-image: url("../media/avenue.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    width: 100%;
+    height: 600px;
+}
+
+.top-panel {
+    width: auto;
+    /* background-color: blueviolet; */
+    padding: 10px;
+    margin: auto;
+    /* color: white; */
+
+}
+
+.instructions {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+}
+
+#textStory {
+    width: 800px;
+    max-width: 80%;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 1px;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.btn {
+    background-color: rgb(175, 149, 76);
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: white;
+    outline: none;
+    border: 1px solid black;
+    width: 200px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: rgb(119, 100, 47);
+}
+
+#player-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+input {
+    width: 200px;
+    height: 30px;
+    margin: 10px;
+}
+
+#inventory {
+    display: none;
+}
+
+#game-ending-message {
+    font-size: 24px;
+    font-weight: bold;
+    color: green;
+}

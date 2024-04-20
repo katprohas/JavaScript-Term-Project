@@ -1,93 +1,132 @@
-//---VARIABLES---//
-//players
-var player1;
-var player2; //computer
+// -------------VARIABLES---------------- //
+
+//canvas
+const canvas = document.getElementById("catPong");
+const ctx = canvas.getContext("2d");
+
+//ball information
+var ballX = canvas.width / 2;
+var ballY = canvas.height - 30;
+var ballSpeedX = -2;
+var ballSpeedY = 2;
+var ballRadius = 25;
+var ballLeft = ballX - ballRadius;
+var ballRight = ballX + ballRadius;
+
+//player information
+const playerHeight = 80;
+const playerWidth = 60;
+
+var player1Y = (canvas.height - playerHeight) / 2;
+var player2Y = (canvas.height - playerHeight) / 2;
 
 //scores
 var player1Score = 0;
 var player2Score = 0;
-const winningScore = 5;
-var gameOver = "";
+var winningScore = 5;
 
-//ball
-var ball;
-var ballSpeedX;
-var ballSpeedY;
-var ballXaxis;
-var ballYaxis;
+//controls
+var rightKey = false;
+var leftKey = false;
+var upKey = false;
+var downKey = false;
 
-var myObstacles = [];
+var aKey = false;
+var wKey = false;
+var sKey = false;
+var dKey = false;
 
+var spacebar = false;
 
-function startGame() {
+// -------------EVENT LISTENERS---------------- //
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+//when key is pressed down
+function keyDownHandler(e) {
+    if (e.key === 37 || e.key === "ArrowRight") {
+        rightKey = true;
+    }
+    if (e.key === 39 || e.key === "ArrowLeft") {
+        leftKey = true;
+    }
+    if (e.key === 38 || e.key === "ArrowUp") {
+        upKey = true;
+    }
+    if (e.key === 40 || e.key === "ArrowDown") {
+        downKey = true;
+    }
 
-    player1 = new component(60, 80, "media/catOne.png", 20, 220, "image");
-    player2 = new component(60, 80, "media/catTwo.png", 720, 220, "image");
-    ball = new component(50, 50, "media/yarn.png", 50, 50, "image")
-    // if (myGameArea.key && myGameArea.key == 39) { player1.speedX = 1; }
-    if (myGameArea.key && myGameArea.key == 38) { player1.speedY = -1; }
-    if (myGameArea.key && myGameArea.key == 40) { player1.speedY = 1; }
-    player1Score = new component("30px", "Consolas", "black", 280, 40, "text");
-    player2Score = new component("30px", "Consolas", "black", 280, 40, "text");
-    myGameArea.start(); //start() creates canvas element
+    // -- ADD CONTROLS FOR TESTING RIGHT PADDLE -- //
+    if (e.code === "KeyD") {
+        dKey = true;
+    }
+    if (e.code === "KeyA") {
+        aKey = true;
+    }
+    if (e.code === "KeyW") {
+        wKey = true;
+    }
+    if (e.code === "KeyS") {
+        sKey = true;
+    }
+
+    //CONTROL FOR SPACEBAR
+    if (e.key === 32 || e.code === "Space") {
+        spacebar = true;
+    }
 }
+//when key is lifted up
+function keyUpHandler(e) {
+    if (e.key === 37 || e.key === "ArrowRight") {
+        rightKey = false;
+    }
+    if (e.key === 39 || e.key === "ArrowLeft") {
+        leftKey = false;
+    }
+    if (e.key === 38 || e.key === "ArrowUp") {
+        upKey = false;
+    }
+    if (e.key === 40 || e.key === "ArrowDown") {
+        downKey = false;
+    }
 
-//build canvas area
-var myGameArea = { //object
-    canvas: document.createElement("canvas"),
-    start: function () {
-        this.canvas.width = 800;
-        this.canvas.height = 600;
-        this.context = this.canvas.getContext("2d");
-        document.body.insertBefore(this.canvas, document.body.childNodes[4]);
-        this.frameNo = 0;
-        this.interval = setInterval(updateGameArea, 20);
-        window.addEventListener('keydown', function (e) {
-            myGameArea.keys = (myGameArea.keys || []);
-            myGameArea.keys[e.keyCode] = true;
-        })
-        window.addEventListener('keyup', function (e) {
-            myGameArea.keys[e.keyCode] = false;
-        })
+    // -- ADD CONTROLS FOR TESTING RIGHT PADDLE -- //
+    if (e.code === "KeyD") {
+        dKey = false;
+    }
+    if (e.code === "KeyA") {
+        aKey = false;
+    }
+    if (e.code === "KeyW") {
+        wKey = false;
+    }
+    if (e.code === "KeyS") {
+        sKey = false;
+    }
 
-    },
-    clear: function () {
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    },
-    stop: function () {
-        clearInterval(this.interval);
+    //CONTROL FOR SPACEBAR
+    if (e.key === 32 || e.code === "Space") {
+        spacebar = false;
     }
 }
 
-function ball() {
-    ballXaxis += ballSpeedX;
-    ballYaxis += ballSpeedY;
-
-    if (player1Score == winningScore) {
-        gameOver = "Player 1 wins";
-    } else {
-        gameOver = "Player 2 wins";
-    }
-    if (ballX > canvas.width && ballSpeedX > 0) {
-
-    }
-}
-
-//build components (load images, score text)
+//DEFINE COMPONENTS (create images, score text)
 function component(width, height, color, x, y, type) {
     this.type = type;
     if (type == "image") {
         this.image = new Image();
         this.image.src = color;
     }
+    //dimensions of object
     this.width = width;
     this.height = height;
+    //location on canvas
     this.x = x;
     this.y = y;
-    this.speedX = 0;
-    this.speedY = 0;
+
+    //ctx.drawGame();
     this.update = function () {
-        ctx = myGameArea.context;
+        //ctx = drawGame.context;
         if (this.type == "text") {
             ctx.font = this.width + " " + this.height;
             ctx.fillStyle = color;
@@ -100,110 +139,235 @@ function component(width, height, color, x, y, type) {
         }
 
     }
-    this.newPos = function () {
-        this.x += this.speedX;
-        this.y += this.speedY;
+}
+// -------------CREATE COMPONENTS---------------- //
+
+function drawBall() {
+    var yarnBall = new component(ballRadius, ballRadius, "media/yarn.png", ballX, ballY, "image");
+    yarnBall.update();
+}
+
+function drawPlayer1() {
+    //player left
+    // ctx.beginPath();
+    // ctx.rect(0, player1Y, playerWidth, playerHeight);
+    // ctx.fillStyle = "#0b6623";
+    // ctx.fill();
+    // ctx.closePath();
+    var player1 = new component(playerWidth, playerHeight, "media/catOne.png", 0, player1Y, "image");
+    player1.update();
+}
+function drawPlayer2() {
+    //player right
+    // ctx.beginPath();
+    // ctx.rect(canvas.width - playerWidth, player2Y, playerWidth, playerHeight);
+    // ctx.fillStyle = "#0095DD";
+    // ctx.fill();
+    // ctx.closePath();
+    var player2 = new component(playerWidth, playerHeight, "media/catTwo.png", 740, player2Y, "image");
+    player2.update();
+}
+
+function drawScores() {
+    ctx.font = "20px Courier";
+    ctx.fillStyle = "black";
+    ctx.fillText(player1Score, canvas.width / 2 - 60, 40);
+    ctx.fillText(player2Score, canvas.width / 2 + 60, 40);
+}
+
+// -------------BALL MOVEMENT/BEHAVIOR---------------- //
+
+function ballMovement() {
+    // Moved position code to simplify logic in following if-else statements
+    ballX += ballSpeedX;
+    ballY += ballSpeedY;
+    // update left and right sides of ball
+    ballLeft = ballX - ballRadius;
+    ballRight = ballX + ballRadius;
+
+    //if player 1 wins
+    if (player1Score == winningScore) {
+        ctx.font = "50px Courier";
+        ctx.fillStyle = "black";
+        ctx.fillText("Player 1 Wins!", 200, canvas.height / 2);
+        gameOver();
     }
-    // this.crashWith = function (otherobj) {
-    //     var myleft = this.x;
-    //     var myright = this.x + (this.width);
-    //     var mytop = this.y;
-    //     var mybottom = this.y + (this.height);
-    //     var otherleft = otherobj.x;
-    //     var otherright = otherobj.x + (otherobj.width);
-    //     var othertop = otherobj.y;
-    //     var otherbottom = otherobj.y + (otherobj.height);
-    //     var crash = true;
-    //     if ((mybottom < othertop) ||
-    //         (mytop > otherbottom) ||
-    //         (myright < otherleft) ||
-    //         (myleft > otherright)) {
-    //         crash = false;
-    //     }
-    //     return crash;
-    // }
+    //if player 2 wins
+    if (player2Score == winningScore) {
+        ctx.font = "50px Courier";
+        ctx.fillStyle = "black";
+        ctx.fillText("Player 2 Wins!", 200, canvas.height / 2);
+        gameOver();
+    }
+
+    //ball hits bottom of screen OR top of screen --OK--
+    if (ballY > canvas.height - ballRadius || ballY < ballRadius) {
+        ballSpeedY = -ballSpeedY;
+    }
+
+    //ball hits left OR right screen edge -- reset game
+    if (ballLeft <= 0) { //ball hits left side
+        player2Score++;
+        ballReset();
+    }
+
+    //ball hits left OR right screen edge -- reset game
+    if (ballRight >= canvas.width) {
+        player1Score++;
+        ballReset();
+    }
+
+    // left paddle contact
+    if (
+        ballLeft <= playerWidth &&
+        ballY > player1Y && //top of paddle
+        ballY < player1Y + playerHeight //bottom of paddle
+    ) {
+        ballSpeedX = 4;
+    }
+    // right paddle contact
+    if (
+        ballRight >= canvas.width - playerWidth &&
+        ballY > player2Y && //top of paddle
+        ballY < player2Y + playerHeight //bottom of paddle
+    ) {
+        ballSpeedX = -4;
+    }
+}
+// ---------------------------------------------------- //
+
+function ballReset() {
+    ballX = canvas.width / 2;
+    ballY = canvas.height - 30;
+    ballSpeedX = 2;
+    ballSpeedY = 2;
+    ballSpeedX = -ballSpeedX;
+}
+// -------------PLAYER 1 MODE COMPUTER HANDLING---------------- //
+function computerHandling() {
+    var player2YCenter = player2Y + (playerHeight / 2);
+    //var computerSpeed = 3;
+    if (player2YCenter < ballY - ballRadius) {
+        player2Y += 1;
+    } else if (player2YCenter > ballY + ballRadius) {
+        player2Y -= 1;
+    }
 }
 
-//what happens when the game ends
+// -------------WHEN GAME ENDS---------------- //
 function gameOver() {
-
+    ballSpeedX = 0;
+    ballSpeedY = 0;
+    ctx.font = "30px Courier";
+    ctx.fillStyle = "black";
+    ctx.fillText("Press the spacebar to reset", 150, canvas.height - 100);
 }
+// -------------DRAW GAME FUNCTIONS FOR 1-PLAYER MODE TO CANVAS---------------- //
+function drawGame1P() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); //clears whole canvas area
 
-function updateGameArea() {
+    //load in functions to create board and components
 
-    var x, height, gap, minHeight, maxHeight, minGap, minHeight;
-    for (i = 0; i < myObstacles.length; i += 1) {
-        if (player1.crashWith(myObstacles[i])) {
-            myGameArea.stop();
-            return;
+    drawPlayer1();
+    drawPlayer2();
+    computerHandling();
+    drawBall();
+    ballMovement();
+    drawScores();
+
+    // ------------  LEFT PADDLE CONTROL ------------- //
+    if (rightKey) {
+        player1Y = Math.min(player1Y + 7, canvas.height - playerHeight);
+    }
+    if (leftKey) {
+        player1Y -= 7;
+        if (player1Y < 0) {
+            player1Y = 0;
         }
     }
-    myGameArea.clear();
-    myGameArea.frameNo += 1;
-    // if (myGameArea.frameNo == 1 || everyinterval(150)) {
-    //     x = myGameArea.canvas.width;
-    //     minHeight = 60;
-    //     maxHeight = 200;
-    //     height = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
-    //     minGap = 50;
-    //     maxGap = 200;
-    //     gap = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
-    //     myObstacles.push(new component(10, height, "blue", x, 0));
-    //     myObstacles.push(new component(10, x - height - gap, "blue", x, height + gap));
-    // }
+    if (upKey) {
+        player1Y = Math.max(player1Y - 7, 0);
+    }
+    if (downKey) {
+        player1Y = Math.min(player1Y + 7, canvas.height - playerHeight);
+    }
 
-    // for (i = 0; i < myObstacles.length; i += 1) {
-    //     myObstacles[i].x += -1;
-    //     myObstacles[i].update();
-    // }
-    //update scores
-    player1Score.text = "Player 1 SCORE: " + myGameArea.frameNo;
-    player1Score.update();
-
-    player2Score.text = "Player 1 SCORE: " + myGameArea.frameNo;
-    player2Score.update();
-
-    player1.newPos();
-    player1.update();
-    // player1.speedX = 0;
-    player1.speedY = 0;
-
-    player2.newPos();
-    player2.update();
-    // player2.speedX = 0;
-    player2.speedY = 0;
-    // if (myGameArea.keys && myGameArea.keys[37]) { player1.speedX = -1; }
-    // if (myGameArea.keys && myGameArea.keys[39]) { player1.speedX = 1; }
-    if (myGameArea.keys && myGameArea.keys[38]) { player1.speedY = -2; }
-    if (myGameArea.keys && myGameArea.keys[40]) { player1.speedY = 2; }
-
+    // ------------  WHEN SPACEBAR IS PRESSED ------------- //
+    if (spacebar) {
+        console.log("Spacebar detected");
+        document.location.reload();
+        //clearInterval(interval);
+        startGame1P();
+    }
 }
 
-function everyinterval(n) {
-    if ((myGameArea.frameNo / n) % 1 == 0) { return true; }
-    return false;
+// -------------DRAW GAME FUNCTIONS FOR 2-PLAYER MODE TO CANVAS---------------- //
+function drawGame2P() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); //clears whole canvas area
+
+    //load in functions to create board and components
+
+    drawPlayer1();
+    drawPlayer2();
+    drawBall();
+    ballMovement();
+    drawScores();
+
+    // ------------  LEFT PADDLE CONTROL ------------- //
+    if (dKey) {
+        player1Y = Math.min(player1Y + 7, canvas.height - playerHeight);
+    }
+    if (aKey) {
+        player1Y -= 7;
+        if (player1Y < 0) {
+            player1Y = 0;
+        }
+    }
+    if (wKey) {
+        player1Y = Math.max(player1Y - 7, 0);
+    }
+    if (sKey) {
+        player1Y = Math.min(player1Y + 7, canvas.height - playerHeight);
+    }
+
+    // ------------  RIGHT PADDLE CONTROL ------------- //
+    if (rightKey) {
+        player2Y = Math.min(player2Y + 7, canvas.height - playerHeight);
+    }
+    if (leftKey) {
+        player2Y -= 7;
+        if (player2Y < 0) {
+            player2Y = 0;
+        }
+    }
+    if (upKey) {
+        player2Y = Math.max(player2Y - 7, 0);
+    }
+    if (downKey) {
+        player2Y = Math.min(player2Y + 7, canvas.height - playerHeight);
+    }
+    // ------------  WHEN SPACEBAR IS PRESSED ------------- //
+    if (spacebar) {
+        console.log("Spacebar detected");
+        document.location.reload();
+        //clearInterval(interval);
+        startGame2P();
+    }
 }
-function moveup() {
-    player1.speedY -= 1;
+
+function startGame1P() {
+    var interval = setInterval(drawGame1P, 10);
 }
 
-function movedown() {
-    player1.speedY += 1;
+function startGame2P() {
+    var interval = setInterval(drawGame2P, 10);
 }
 
-// function moveleft() {
-//     player1.speedX -= 1;
-// }
-
-// function moveright() {
-//     player1.speedX += 1;
-// }
-
-function stopMoving() {
-    player1.speedX = 0;
-    player1.speedY = 0;
-}
-
-
-
-
+document.getElementById("runButton1P").addEventListener("click", function () {
+    startGame1P();
+    this.disabled = true;
+});
+document.getElementById("runButton2P").addEventListener("click", function () {
+    startGame2P();
+    this.disabled = true;
+});

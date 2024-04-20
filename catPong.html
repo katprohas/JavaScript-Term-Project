@@ -11,6 +11,8 @@
     <meta charset="UTF-8" />
     <title>Term Project</title>
     <link href="css/finalProject.css" rel="stylesheet">
+
+    <link href="css/catPong.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -18,67 +20,50 @@
         rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <style>
-        canvas {
-            background-color: rgb(177, 238, 242);
-            border: black 1px solid;
-        }
 
-        body {
-            font-family: sans-serif;
-            text-align: center;
-            font-size: 1em;
-            ;
-        }
-
-        section {
-            width: auto;
-            background-color: blueviolet;
-            padding: 10px;
-            margin: auto;
-            /* color: white; */
-
-        }
-
-        #instructions {
-            width: 50%;
-            margin-left: auto;
-            margin-right: auto;
-            padding-bottom: 10px;
-        }
-    </style>
 
 </head>
 
-<body onload="startGame()">
+<body>
     <header>
-        <h1>CIT 190: Racing Cats <img src="media/cat1.png" style="width:100px; float: right;" /></h1>
+        <h1>CIT 190: Cat Pong <img src="media/cat1.png" style="width:100px; float: right;" /></h1>
     </header>
     <main>
         <nav id="nav-main">
             <ul>
                 <li><a href="finalProject.html">Home</a></li>
                 <li><a href="puzzles.html">Puzzles</a></li>
-                <li><a href="catPong.html" class="active-page">Pong with Cats</a></li>
-                <li><a href="game3.html">Game 3</a></li>
+                <li><a href="catPong.html" class="active-page">Cat Pong</a></li>
+                <li><a href="catWrangling.html">Cat Wrangling</a></li>
                 <li><a href="readme.txt" target="_blank">READ ME</a></li>
                 <!-- <li><a href="#">About</a></li> -->
             </ul>
         </nav>
-        <section>
-            <div id="instructions">
+        <section class="top-panel">
+            <div class="instructions">
                 <button class="accordion">How to Play Cat Pong</button>
                 <div class="panel">
-                    <p>This is pong reimagined - with cats! Play against the computer or with a friend. Use keyboard or
-                        mouse
-                        controls to play.</p>
+                    <p>This is pong reimagined - with cats! Play against the computer or with a friend. First to 5
+                        points wins. Use the keyboard
+                        to control your player. </p>
+                    <ul><strong>For 1-player mode: </strong><br />
+                        <li>Up: LEFT or UP arrow keys</li>
+                        <li>Down: RIGHT or DOWN arrow keys</li><br />
+                    </ul>
+                    <ul><strong>For 2-player mode: </strong><br />
+                        <li>Player 1 (left): Up - W or A; Down - S or D</li>
+                        <li>Player 2 (right): arrow keys as in player 1 mode</li>
+                    </ul>
                 </div>
             </div>
-            <!-- <div>
-                <canvas id="catPongCanvas">Racing Cats Goes Here</canvas>
-            </div> -->
 
         </section>
+        <div id="buttons">
+            <button id="runButton1P">Start game - 1 player mode</button>
+            <button id="runButton2P">Start game - 2 player mode</button>
+        </div>
+        <canvas id="catPong" width="800" height="550"></canvas>
+
     </main>
     <footer>
 

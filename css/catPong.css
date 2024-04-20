@@ -1,0 +1,26 @@
+         button {
+             background-color: rgb(227, 133, 149);
+             font-size: 1em;
+             color: rgb(92, 5, 26);
+             font-weight: 700;
+             outline: none;
+             border: none;
+             margin: 5px;
+             padding: 10px;
+         }
+
+         button:hover {
+             background-color: rgb(237, 93, 117);
+             color: rgb(92, 5, 26);
+         }
+
+         canvas {
+             background-color: rgb(177, 238, 242);
+             border: black 1px solid;
+         }
+
+         body {
+
+             text-align: center;
+
+         }

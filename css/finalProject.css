@@ -17,7 +17,7 @@ header {
 
 h1 {
     text-align: center;
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
 }
 
 h1 img {
@@ -56,9 +56,14 @@ h1 img {
     padding: 10px;
 }
 
-#nav-main a:hover {
+#nav-main a:hover,
+a:focus {
     color: rgb(87, 30, 5);
     background-color: antiquewhite;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    font-weight: 800;
 }
 
 #nav-main .active-page {
@@ -69,13 +74,14 @@ h1 img {
     font-weight: 800;
 }
 
+/* 
 #nav-main a:focus {
     color: rgb(87, 30, 5);
     background-color: antiquewhite;
     text-decoration: underline;
     text-decoration-thickness: 3px;
     font-weight: 800;
-}
+} */
 
 
 ul,
